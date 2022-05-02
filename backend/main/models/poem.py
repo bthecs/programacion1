@@ -26,7 +26,8 @@ class Poem(db.Model):
             'title': str(self.title),
             'user': self.user.to_json(),
             'body': str(self.body),
-            'date': str(self.date.strftime("%d-%m-%Y"))
+            'date': str(self.date.strftime("%d-%m-%Y")),
+            'qualifications': int(self.qualifications)
         }
         return poem_json
     

@@ -35,8 +35,39 @@ class User(Resource):
 class Users(Resource):
     
     def get(self):
-        users = db.session.query(UserModel).all()
-        return jsonify([user.to_json() for user in users])
+        page = 1
+        per_page = 10
+        
+        users = db.session.query(UserModel)
+        
+        if request.get_json():
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "name":
+                    name = name.filter(UserModel.name.like("%"+ value +"%"))
+                if key == "email":
+                    email = email.filter(UserModel.email.like("%"+ value +"%"))
+
+                #Order
+                if key == "sort_by":
+                    if value == "name":
+                        name = name.order_by(UserModel.name)
+                    if value == "name[des]":
+                        name = name.order_by(UserModel.name.desc())
+                    if value == "email":
+                        email = email.order_by(UserModel.email)
+                    if value == "email[desc]":
+                        email = email.order_by(UserModel.email.desc())
+        
+        users = users.paginate(page, per_page, False, 30)
+        return jsonify({
+            "poems" : [users.to_json_short() for user in users.items],
+            "total" : users.total,
+            "pages" : users.pages,
+            "page" : page
+            
+            })
+    
 
     
     def post(self):
