@@ -2,12 +2,16 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import UserModel
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import role_required
 
 
 
 #Poem resources
 class User(Resource):
     
+    #Obtener el recurso
+    @jwt_required()
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         return user.to_json()

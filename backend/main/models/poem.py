@@ -15,7 +15,7 @@ class Poem(db.Model):
     user = db.relationship('User', back_populates="poems",uselist=False,single_parent=True)
     qualifications = db.relationship("Qualify", back_populates="poems", cascade="all, delete-orphan")
     
-    
+       
     def __repr__(self):
         return '<Poem: %r %r %r %r >' % (self.title, self.user_id, self.body, self.date)    
 
