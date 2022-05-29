@@ -5,7 +5,9 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from .. import db
 from main.models import PoemModel, UserModel, QualifyModel
 from sqlalchemy import func
-from main.auth.decorators import poet_required
+from main.auth.decorators import poet_required, admin_required
+from main.mail.functions import sendMail
+
 
 
 
@@ -89,7 +91,8 @@ class Poems(Resource):
             
             })
 
-    @jwt_required()
+    @admin_required
+    @poet_required
     def post(self):
         poem = PoemModel.from_json(request.get_json())
         db.session.add(poem)

@@ -4,6 +4,7 @@ from flask import request, jsonify
 from main.auth.decorators import admin_required, poet_required
 from .. import db
 from main.models import UserModel
+from main.mail.functions import sendMail
 
 
 
@@ -88,12 +89,13 @@ class Users(Resource):
             })
     
 
-    @admin_required
+    #@admin_required
     def post(self):
         
         user = UserModel.from_json(request.get_json())
         db.session.add(user)
         db.session.commit()
+        sendMail(user.email, 'Bienvenido a Poet', 'mail/new_poem', user=user)
         return user.to_json(), 201
 
     
