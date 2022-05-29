@@ -3,29 +3,36 @@ from flask import jsonify
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 from functools import wraps
 
-#Decorador para restringir el acceso a usuarios admin
+
+#Restriccion de acceso a los usuarios que no esten autenticados solamente acceden admins
 def admin_required(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
-        #Verificar que el JWT es correcto
         verify_jwt_in_request()
-        #Obtener claims de adentro del JWT
-        claims = get_jwt()
-        #Verificar que el rol sea admin
-        if claims['role'] =="admin" :
-            #Ejecutar función
+        jwt_data = get_jwt()
+        if jwt_data['role'] == 'admin':
             return fn(*args, **kwargs)
-        else:
-            return 'Only admins can access', 403
+        return jsonify({'message': 'Admin access required'}), 403
     return wrapper
 
-#Define el atributo que se utilizará para identificar el usuario
+
+def poet_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        verify_jwt_in_request()
+        jwt_data = get_jwt()
+        if jwt_data['role'] == 'poet':
+            return fn(*args, **kwargs)
+        return jsonify({'message': 'Poet access required'}), 403
+    return wrapper
+
+
+#Se utilizara el id del usuario para identificar el mismo
 @jwt.user_identity_loader
 def user_identity_lookup(user):
-    #Definir ID como atributo identificatorio
     return user.id
 
-#Define que atributos se guardarán dentro del token
+
 @jwt.additional_claims_loader
 def add_claims_to_access_token(user):
     claims = {

@@ -52,14 +52,18 @@ class User(db.Model):
             'rol': str(self.rol),
             'email': str(self.email),
             'poems':poems,
-            'qualifications':qualifications
+            'qualifications':qualifications,
+            'num_poems':len(poems),
+            'num_qualifications':len(qualifications)
         }
         return user_json
     def to_json_short(self):
         user_json = {
             'id': self.id,
+            'name': str(self.name),
             'email': str(self.email)
         }
+        return user_json
     
     @staticmethod
     def from_json(user_json):

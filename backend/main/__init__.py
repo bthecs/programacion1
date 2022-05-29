@@ -1,3 +1,4 @@
+from flask_jwt_extended import JWTManager
 import os
 from flask import Flask
 from dotenv import load_dotenv
@@ -10,6 +11,8 @@ api = Api()
 
 
 db = SQLAlchemy()
+
+jwt = JWTManager()
 
 
 def create_app():
@@ -33,5 +36,6 @@ def create_app():
     api.add_resource(resources.QualifyResource, '/qualify/<id>')
     api.add_resource(resources.UsersResource, '/users')
     api.add_resource(resources.UserResource, '/user/<id>')
+    api.add_resource(resources.PoemInfoResource,'/poeminfo')
     api.init_app(app)
     return app

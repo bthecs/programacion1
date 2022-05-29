@@ -1,5 +1,6 @@
 from .poem import Poem as PoemResource
 from .poem import Poems as PoemsResource
+from .poem import PoemInfo as PoemInfoResource
 
 from .qualify import Qualify as QualifyResource
 from .qualify import Qualifications as QualificationsResource

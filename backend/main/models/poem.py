@@ -1,5 +1,6 @@
 from datetime import datetime
 from email.policy import default
+import statistics
 from sqlalchemy import column
 from .. import db
 import datetime
@@ -19,7 +20,18 @@ class Poem(db.Model):
     def __repr__(self):
         return '<Poem: %r %r %r %r >' % (self.title, self.user_id, self.body, self.date)    
 
-    
+    def poem_score(self):
+        qualifications_poem = []
+        if len(self.qualifications) == 0:
+            mean = 0
+            
+        else:
+            for qualification in self.qualifications:
+                score = qualification.score
+                qualifications_poem.append(score)
+            return statistics.mean(qualifications_poem)
+            
+        
     def to_json(self):
         poem_json = {
             'id': self.id,
@@ -27,11 +39,18 @@ class Poem(db.Model):
             'user': self.user.to_json(),
             'body': str(self.body),
             'date': str(self.date.strftime("%d-%m-%Y")),
-            'qualifications': int(self.qualifications)
+            'qualifications': [qualify.to_json_short() for qualify in self.qualifications],
+            'score': self.poem_score()
         }
         return poem_json
     
-    
+    def to_json_short(self):
+        poem_json = {
+            'id': self.id,
+            'title': self.title,
+            'body': self.body
+        }
+        return poem_json
     
     @staticmethod
     def from_json(poem_json):

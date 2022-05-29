@@ -1,6 +1,7 @@
 from .. import db
 
 
+
 class Qualify(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     score = db.Column(db.Integer, nullable = False)
@@ -16,27 +17,30 @@ class Qualify(db.Model):
         return '<Qualify: %r %r %r %r >' % (self.score, self.comment, self.user_id, self.poem_id)    
 
     
+    
     def to_json(self):
+        poems = poems.to_json_short()
+        user = [user.to_json_complete() for user in self.user]
         qualify_json = {
             'id': self.id,
-            'score': int(self.score),
-            'comment': str(self.comment),
-            'user_id': self.user.to_json(),
-            'poem_id': self.poems.to_json()
+            'name': self.name,
+            'password': self.password,
+            'role': self.role,
+            'email': self.email,
+            'score': self.score,
+            'user': user,
+            'poem': poems
         }
         return qualify_json
+        
     
-    def to_json_complete(self):
-        poems = [poem.to_json() for poem in self.poems]
-        user = [users.to_json() for users in self.user]
+    def to_json_short(self):
         qualify_json = {
             'id': self.id,
-            'name': str(self.name),
-            'password': str(self.password),
-            'rol': str(self.rol),
-            'email': str(self.email),
-            'poems':poems,
-            'user':user
+            'score': self.score,
+            'comment': self.comment,
+            'user_id': self.user_id,
+            'poem_id': self.poem_id
         }
         return qualify_json
     
