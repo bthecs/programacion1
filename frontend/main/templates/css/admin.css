@@ -1,5 +1,50 @@
-body{
-    background:linear-gradient(to right, #F27121, hsla(33, 100%, 48%, 0.849), hsla(49, 100%, 50%, 0.486));
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    height: 300px;
+    background: #8A2387;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F27121, hsla(352, 79%, 58%, 0.483), hsla(302, 60%, 34%, 0.486)), url(../img/header.png);
+    background: linear-gradient(to right, #F27121, hsla(352, 79%, 58%, 0.483), hsla(302, 60%, 34%, 0.486)), url(../img/header.png); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+nav{
+    text-align: left;
+    padding: 30px 50px 0 0;
+}
+
+nav > a{
+    color:aliceblue;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+nav > a:hover{
+    text-decoration: underline;
+}
+
+header .textos-header{
+    display: flex;
+    height: 150px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.wave{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .container{
@@ -10,10 +55,6 @@ body{
     overflow: hidden;
 }
 
-.slider{
-    background:linear-gradient(to right, #F27121, hsla(33, 100%, 48%, 0.849), hsla(49, 100%, 50%, 0.486));
-    padding: 40px 0;
-}
 
 .slider__container{
     display: grid;
@@ -28,7 +69,6 @@ body{
     opacity: 0;
     pointer-events: none;
     display: grid;
-    background:linear-gradient(to right, #F27121, hsla(33, 100%, 48%, 0.849), hsla(49, 100%, 50%, 0.486));
     grid-template-columns: 1fr max-content;
     align-items: center;
     transition: opacity 1.5s;
@@ -62,6 +102,7 @@ body{
     object-fit: cover;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .slider__arrow{
@@ -89,7 +130,7 @@ section.slider__body section:target{
     font-size: 18px;
     color:#222;
     outline: none;
-    border: 1px solid silver;
+    border: 1px solid rgb(26, 26, 26);
     border-radius: 30px;
     transition: all 0.6 ease;
     text-align: center;
@@ -102,7 +143,7 @@ section.slider__body section:target{
     top:0;
     left: 0;
     position: absolute;
-    background: #F27121;
+    background: #363636;
     text-align: center;
     color:white;
     font-size: 18px;
@@ -110,20 +151,6 @@ section.slider__body section:target{
     cursor:pointer;
 }
 
-.home{
-    position: relative;
-    padding: 5px;
-}
-
-.btn{
-    width: 120px;
-    height: 30px;
-    background-color: #222;
-    color: white;
-    border-radius: 10%;
-    cursor:pointer;
-    font-size: 18px;
-}
 
 .buscar:hover input{
     width: 240px;
