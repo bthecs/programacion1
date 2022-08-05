@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
-
-from main.auth.decorators import admin_required, poet_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
 from .. import db
 from main.models import UserModel
 from main.mail.functions import sendMail
@@ -13,13 +13,21 @@ from main.mail.functions import sendMail
 class User(Resource):
     
     #Obtener el recurso
-
+    @jwt_required()
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
-        return user.to_json()
+        
+        #Verifica el Usuario
+        identity = get_jwt_identity()
+        
+        if identity:
+            return user.to_json_short()
+        else:
+            return user.to_json_pulic()
+            
 
     @admin_required
-    @poet_required
+    @jwt_required()
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         data = request.get_json().items()
@@ -31,9 +39,8 @@ class User(Resource):
 
 
     @admin_required
-    @poet_required
+    @jwt_required()
     def delete(self, id):
-        
         user = db.session.query(UserModel).get_or_404(id)
         db.session.delete(user)
         db.session.commit()
@@ -41,6 +48,7 @@ class User(Resource):
 
 
 class Users(Resource):
+    
     @admin_required
     def get(self):
         page = 1
@@ -89,7 +97,7 @@ class Users(Resource):
             })
     
 
-    #@admin_required
+    @admin_required
     def post(self):
         
         user = UserModel.from_json(request.get_json())

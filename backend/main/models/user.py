@@ -31,6 +31,12 @@ class User(db.Model):
     def __repr__(self):
         return '<User: %r %r %r %r >' % (self.name, self.password, self.rol, self.email)    
 
+    def to_json_public(self):
+        user_json = {
+            'id': self.id,
+            'name': str(self.name)
+        }
+        return user_json
     
     def to_json(self):
         user_json = {
@@ -64,6 +70,7 @@ class User(db.Model):
             'email': str(self.email)
         }
         return user_json
+    
     
     @staticmethod
     def from_json(user_json):

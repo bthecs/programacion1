@@ -7,22 +7,24 @@ from flask_jwt_extended import create_access_token
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-#Metodo para logear
+
+#Método de logueo
 @auth.route('/login', methods=['POST'])
 def login():
-    #Obtenemos los datos del usuario
-    user = db.session.query(UserModel).filter(UserModel.email == request.json['email']).first_or_404()
-    #Validar la contraseña
-    if user.validate_pass(request.json['password']):
-        #Generamos el token
+    #Busca al usuario en la db por mail
+    user = db.session.query(UserModel).filter(UserModel.email == request.get_json().get("email")).first_or_404()
+    #Valida la contraseña
+    if user.validate_pass(request.get_json().get("password")):
+        #Genera un nuevo token
+        #Pasa el objeto professor como identidad
         access_token = create_access_token(identity=user)
-        #Devolvemos los valores
+        #Devolver valores y token
         data = {
             'id': str(user.id),
             'email': user.email,
             'access_token': access_token
         }
+
         return data, 200
     else:
         return 'Incorrect password', 401
-

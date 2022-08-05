@@ -1,7 +1,8 @@
 from flask_restful import Resource
 from flask import request, jsonify
-
-from main.auth.decorators import admin_required, poet_required
+import jwt
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
 from .. import db
 from main.models import QualifyModel
 
@@ -13,7 +14,7 @@ class Qualify(Resource):
         qualify = db.session.query(QualifyModel).get_or_404(id)
         return qualify.to_json_short()
 
-    @poet_required
+    @jwt_required()
     def put(self, id):
         qualify = db.session.query(QualifyModel).get_or_404(id)
         data = request.get_json().items()
@@ -25,7 +26,7 @@ class Qualify(Resource):
 
     
     @admin_required
-    @poet_required
+    @jwt_required()
     def delete(self, id):
         
         qualify = db.session.query(QualifyModel).get_or_404(id)
@@ -42,7 +43,7 @@ class Qualifications(Resource):
         qualifications = db.session.query(QualifyModel).all()  
         return jsonify([qualify.to_json_short() for qualify in qualifications])
     
-    @poet_required
+    @jwt_required()
     def post(self):
         qualify = QualifyModel.from_json(request.get_json())
         db.session.add(qualify)

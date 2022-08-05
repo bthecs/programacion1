@@ -52,6 +52,16 @@ class Poem(db.Model):
         }
         return poem_json
     
+    def to_json_poem_public(self):
+        poem_json = {
+            'id': self.id,
+            'title': self.title,
+            'body': self.body,
+            'date': str(self.date.strftime("%d-%m-%Y")),
+            'score': self.poem_score()
+        }
+        return poem_json
+    
     @staticmethod
     def from_json(poem_json):
         id = poem_json.get('id')
