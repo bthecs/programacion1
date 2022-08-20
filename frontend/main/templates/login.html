@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>login</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Centered-Brand.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
-    <form class="form">
-        <h2 class="form__title">Inicia Sesion</h2>
-        
-        <div class="form__container">
-            <div class="form__group">
-                <input type="text" id="name" class="form__input" placeholder=" ">
-                <label for="name" class="form__label">Nombre:</label>
-                <span class="form__line"></span>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2>Welcome</h2>
+                    <p class="w-lg-50">welcome to the best poetry site</p>
+                </div>
             </div>
-            <div class="form__group">
-                <input type="text" id="user" class="form__input" placeholder=" ">
-                <label for="user" class="form__label">Usuario:</label>
-                <span class="form__line"></span>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-xl-4">
+                    <div class="card mb-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <form class="text-center" method="post">
+                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form__group">
-                <input type="text" id="password" class="form__input" placeholder=" ">
-                <label for="password" class="form__label">Contraseña:</label>
-                <span class="form__line"></span>
-            </div>
-            <input type="submit" class="form__submit" value="Entrar">
         </div>
-    </form>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

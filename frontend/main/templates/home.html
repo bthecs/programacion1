@@ -1,105 +1,77 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poems</title>
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>home</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Articles-Badges.css">
+    <link rel="stylesheet" href="assets/css/Filter.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
-    <header>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Profile</a>
-            <a href="#">User</a>
-        </nav>
-        <section class="textos-header">
-            <h1>Lee los mejores poemas en tu sitio favorito</h1>
-            <h2>Todo en un mismo lugar</h2>
-        </section>
-        <div class="wave" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.99 C150.00,150.00 349.20,-49.99 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
-    </header>
-    <main>
-        <section class="contenedor sobre-nosotros">
-            <h2 class="titulo">Nuestra pagina</h2>
-            <div class="contenedor-sobre-nosotros">
-                <img src="img/ilustracion1.svg" alt="", class="image-about-us">
-                <div class="contenedor-items">
-                    <h3><span>1</span>Los mejores poemas</h3>
-                    <p>Bienvenidos a la pagina aqui podras encontrar los mejores poemas escritos por autores amateurs</p>
-                    <h3><span>2</span>Los mejores poemas</h3>
-                    <p>Bienvenidos a la pagina aqui podras encontrar los mejores poemas escritos por autores amateurs</p>
-                </div>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark py-3">
+        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-5">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Profile</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Home</a>
             </div>
-        </section>
-        <section class="portafolio">
-            <div class="contenedor">
-                <h2 class="titulo">Poemas</h2>
-                <div class="galeria-port">
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                    <div class="image-port">
-                        <img src="img/imagen1.png" alt="">
-                        <div class="hover-galeria">
-                            <img src="img/icono1.png" alt="">
-                            <p>Nuestros Poemas</p>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"><div class="filter">
+    <form>
+        <select>
+             <option value="">Filter</option>
+        </select>    
+    </form>
+</div></div>
+        </div>
+    </div>
+    <div class="container py-4 py-xl-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2>Poems</h2>
             </div>
-        </section>
-    </main>
+        </div>
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <div class="col">
+                <div class="p-4">
+                    <h4>Lorem libero donec</h4>
+                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                    <div class="d-flex">
+                        <div></div>
+                    </div>
+                </div><button class="btn btn-primary" type="button">Button</button>
+            </div>
+            <div class="col">
+                <div class="p-4">
+                    <h4>Lorem libero donec</h4>
+                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                    <div class="d-flex">
+                        <div></div>
+                    </div>
+                </div><button class="btn btn-primary" type="button">Button</button>
+            </div>
+            <div class="col">
+                <div class="p-4">
+                    <h4>Lorem libero donec</h4>
+                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                    <div class="d-flex">
+                        <div></div>
+                    </div>
+                </div><button class="btn btn-primary" type="button">Button</button>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>
