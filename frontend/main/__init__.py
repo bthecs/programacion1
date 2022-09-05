@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from dotenv import load_dotenv
+from main.routes import main, user, poem
 
 def create_app():
     
@@ -8,5 +9,8 @@ def create_app():
     
     load_dotenv()
     
+    app.register_blueprint(main.app)
+    app.register_blueprint(user.author)
+    app.register_blueprint(poem.poem)
     
     return app
