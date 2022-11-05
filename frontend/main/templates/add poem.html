@@ -1,15 +1,23 @@
-{% extends 'base.html'%} {# HERENCIA #}
+{% extends "base.html" %}
+
+{% block head %}
+{{ super()}}
+<link rel="stylesheet" href="{{ url_for('static',filename='add_poem.css')}}" type="text/css">
+<title>New Poem</title>
+{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">Add Poem</h1>
-                <form>
-                    <div class="form-group mb-3"><label class="form-label">Title</label><input class="form-control" type="text" placeholder="Title name"></div>
-                    <div class="form-group mb-3"><label class="form-label">Description</label><textarea class="form-control" placeholder="write poem" rows="5"></textarea></div><button class="btn btn-light" type="button">Add Poem</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<form class="form-style-9">
+    <ul>
+        <li>
+            <input type="text" name="field3" class="field-style field-full align-none" placeholder="Title" />
+        </li>
+        <li>
+            <textarea name="field5" class="field-style" placeholder="Poem"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="Upload Poem" />
+        </li>
+    </ul>
+</form>
 {% endblock %}

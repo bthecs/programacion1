@@ -1,60 +1,101 @@
-{% extends 'base.html'%} {# HERENCIA #}
-{% block content %}
-<div class="card"></div>
-<div class="title-div">
-    <h1>title</h1>
-</div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id turpis erat. Maecenas quis facilisis mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum euismod accumsan quam, a consectetur leo pellentesque sit amet. Maecenas ultricies dictum est id luctus. Nam volutpat finibus pharetra. Nunc tortor sapien, vulputate in vestibulum a, aliquam eget libero. Suspendisse lacinia velit lacus, ut convallis mauris maximus non. Cras sit amet tortor laoreet, egestas enim sed, tempus enim. Suspendisse ut eros at nulla iaculis lobortis. Cras odio massa, viverra eu fermentum vitae, porttitor nec velit. Mauris eu suscipit arcu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+{% extends "base.html" %}
 
-Aenean vel congue lectus. In commodo bibendum nisi, id tincidunt ipsum faucibus sit amet. Ut sodales nec diam vel interdum. Nunc sit amet ligula at justo efficitur rhoncus. Curabitur vel scelerisque purus. Donec quam magna, rhoncus ac posuere a, ullamcorper ut dui. Vestibulum magna nibh, mollis vel posuere ac, fermentum ut est. Sed vel lorem vitae sapien accumsan aliquet non id enim. Vivamus imperdiet dui vitae dui faucibus fringilla.
-
-Mauris ac interdum urna. Aliquam tempor leo eu efficitur sagittis. Sed faucibus neque at elit consectetur, sagittis pellentesque dui condimentum. Pellentesque eleifend suscipit erat. Vestibulum tempor finibus risus ut commodo. Integer eget imperdiet magna. Sed iaculis facilisis blandit. Nulla tempus bibendum tellus nec tincidunt. Curabitur imperdiet arcu ante, vel fermentum erat tincidunt sit amet. Nam dapibus volutpat libero. Nunc nec nisi aliquet orci pretium lobortis. In laoreet nec libero nec rhoncus. Nunc quis lacus convallis, commodo ligula in, elementum dui. Nulla eget ante turpis. Sed vitae porta ex, sed condimentum nunc. Quisque volutpat dolor sapien, et euismod erat eleifend et.
-
-Morbi nulla sapien, ullamcorper sed ultricies id, ultrices sit amet mi. Cras vel posuere risus. Etiam non est eu massa ultricies eleifend pharetra at sem. Quisque ultrices ante lacus, nec consectetur mauris scelerisque nec. Proin eget ante dui. Nulla ex nibh, faucibus non augue vitae, faucibus pulvinar enim. Cras mattis consequat orci, lacinia sodales augue placerat cursus. Morbi eget sollicitudin dolor. Nunc faucibus quis arcu ut maximus. Aenean tempor maximus augue, sit amet blandit turpis tincidunt eu. Quisque dignissim condimentum facilisis. Donec nec risus posuere nulla ornare mattis. Mauris porta sapien at enim blandit, ac efficitur orci varius. Etiam eleifend elementum augue a bibendum.
-
-Ut quis varius nunc, at egestas urna. In vehicula purus vitae turpis ornare venenatis. Vestibulum ultricies pulvinar sem in hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin malesuada, enim eu pellentesque tincidunt, neque nibh volutpat justo, nec molestie felis est ac eros. In scelerisque elementum sem, quis suscipit leo sagittis sed. Etiam non quam sit amet enim pharetra ullamcorper ac fringilla dui. Nullam vel diam vitae nibh sagittis pharetra. Nunc lacinia nunc ac risus tempor, a dapibus enim sodales. Praesent at nisi lacus. Nunc ut commodo ipsum. Aliquam commodo felis sit amet tempus tincidunt. Ut elementum erat a efficitur tincidunt. Duis cursus, sem quis molestie aliquam, ex felis tristique eros, id commodo arcu justo in lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-<div class="user-body"><span class="heading">Poem Rating</span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span></div>
-<h3>Comments</h3>
-<div class="card">
-    <div class="card-body" style="height:233px;">
-        <ul class="list-group">
-            <li class="list-group-item" style="margin-bottom:6px;">
-                <div class="d-flex media">
-                    <div></div>
-                    <div class="media-body">
-                        <div class="d-flex media" style="overflow:visible;">
-                            <div></div>
-                            <div style="overflow:visible;" class="media-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>commentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
-</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item" style="margin-bottom:6px;">
-                <div class="d-flex media">
-                    <div></div>
-                    <div class="media-body">
-                        <div class="d-flex media" style="overflow:visible;">
-                            <div></div>
-                            <div style="overflow:visible;" class="media-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>comentarios<br>
-</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul><textarea></textarea><button class="btn btn-primary" type="button">Add Comment</button>
-    </div>
-</div>
+{% block head %}
+{{ super()}}
+<link rel="stylesheet" href="{{ url_for('static',filename='poem_view.css')}}" type="text/css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<title>View Poem</title>
 {% endblock %}
 
+{% block content %}
+<section>
+    <div id="poem">
+        <h1 class="poem_title">title</h1>
+        <h2>Lautaro Gimenez</h2>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <br>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <br>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <br>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <br>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <br>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+        <br>
+        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
+            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
+            quae tempora nobis atque.</p>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="be-comment-block">
+            <div class="be-comment">
+                <div class="be-comment-content">
+
+                    <span class="be-comment-name">
+                        <a href="blog-detail-2.html">Matias</a>
+                    </span>
+
+                    <p class="be-comment-text">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat culpa qui blanditiis molestiae
+                        quas fuga explicabo tenetur minima? Odio vero rem quas perspiciatis minus ducimus fuga fugit
+                        incidunt sed eveniet.
+                    </p>
+                </div>
+            </div>
+            <div class="be-comment">
+                <div class="be-comment-content">
+                    <span class="be-comment-name">
+                        <a href="blog-detail-2.html">Franco</a>
+                    </span>
+                    <p class="be-comment-text">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate quos sint incidunt dolores!
+                        Voluptates ipsam facilis impedit vitae sapiente aperiam eius inventore nesciunt ipsa earum.
+                        Soluta saepe odio ipsa amet.
+                    </p>
+                </div>
+            </div>
+            <div class="be-comment">
+                <div class="be-comment-content">
+                    <span class="be-comment-name">
+                        <a href="blog-detail-2.html">Lautaro</a>
+                    </span>
+                    <p class="be-comment-text">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero distinctio ab aliquam hic!
+                        Consectetur rerum quasi vel quis perferendis unde molestias quibusdam reiciendis laborum
+                        reprehenderit asperiores quisquam explicabo, velit dignissimos!
+                    </p>
+                </div>
+            </div>
+            <form class="form-block">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <textarea class="form-input" required="" placeholder="Your text"></textarea>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary pull-right">submit</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
