@@ -15,8 +15,6 @@
 
 <!-- NAVBAR-->
 {%block content %}
-<section class="home">
-</section>
 <section>
     <div class="container">
         <div class="row searchFilter">
@@ -51,21 +49,23 @@
                         <button id="searchBtn" type="button" class="btn btn-secondary btn-search"><span
                                 class="glyphicon glyphicon-search">&nbsp;</span> <span
                                 class="label-icon">Search</span></button>
-                        <button id="searchBtn" type="button" class="btn btn-secondary btn-search"><span
+                        <button id="searchBtn" type="button" class="btn btn-secondary btn-search"><a href="/add_poem"><span
                                 class="glyphicon glyphicon-search">&nbsp;</span> <span class="label-icon">Add
-                                Poem</span></button>
+                                Poem</span></a></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+{% for poem in poems %}
 <section>
     <div id="container">
 
         <div class="product-details">
 
-            <h1>Poem 1</h1>
+            <a href="/"><h1>{{poem.title}}</h1></a>
+            <h3>{{poem.user.name}}</h3>
             <br>
             <span class="hint-star star">
                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -75,11 +75,7 @@
                 <i class="fa fa-star-o" aria-hidden="true"></i>
             </span>
 
-            <p class="information">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur soluta nam, ut
-                consectetur, atque, quasi omnis nostrum suscipit laudantium accusantium eum unde? Magnam harum neque
-                quasi laudantium consequuntur, fugit architecto.</p>
-
-
+            <p class="information">{{poem.body}}</p>
         </div>
 
         <div class="product-image">
@@ -89,39 +85,8 @@
         </div>
 
     </div>
-
 </section>
-<section>
-    <div id="container">
-
-        <div class="product-details">
-
-            <h1>Poem 2</h1>
-            <br>
-            <span class="hint-star star">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-            </span>
-
-            <p class="information">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur soluta nam, ut
-                consectetur, atque, quasi omnis nostrum suscipit laudantium accusantium eum unde? Magnam harum neque
-                quasi laudantium consequuntur, fugit architecto.</p>
-
-
-        </div>
-
-        <div class="product-image">
-
-            <img src="https://images.unsplash.com/photo-1606830733744-0ad778449672?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzl8fGNocmlzdG1hcyUyMHRyZWV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                alt="">
-        </div>
-
-    </div>
-
-</section>
+{% endfor %}
 <!-- Jquery needed -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="js/scripts.js"></script>

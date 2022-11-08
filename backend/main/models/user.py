@@ -24,6 +24,7 @@ class User(db.Model):
         
     #Método que compara una contraseña en texto plano con el hash guardado en la db
     def validate_pass(self,password):
+        print(f"Password: {password}, Self.password: {self.password}")
         return check_password_hash(self.password, password)
 
     

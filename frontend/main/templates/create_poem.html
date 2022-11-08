@@ -7,16 +7,16 @@
 {% endblock %}
 
 {% block content %}
-<form class="form-style-9">
+<form class="form-style-9" method="post" action="/add_poem">
     <ul>
         <li>
-            <input type="text" name="field3" class="field-style field-full align-none" placeholder="Title" />
+            <input type="text" name="title" class="field-style field-full align-none" placeholder="title" />
         </li>
         <li>
-            <textarea name="field5" class="field-style" placeholder="Poem"></textarea>
+            <textarea name="body" class="field-style" placeholder="body"></textarea>
         </li>
         <li>
-            <input type="submit" value="Upload Poem" />
+            <button type="submit">upload poem</button>
         </li>
     </ul>
 </form>

@@ -47,6 +47,7 @@ class Poem(db.Model):
     def to_json_short(self):
         poem_json = {
             'id': self.id,
+            'user': self.user.to_json(),
             'title': self.title,
             'body': self.body
         }

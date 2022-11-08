@@ -25,9 +25,4 @@ def user_identity_lookup(user):
 #Atributos que se guardaran dentro del Token
 @jwt.additional_claims_loader
 def add_claims_to_access_token(user):
-    claims = {
-        'rol': user.rol,
-        'id': user.id,
-        'email': user.email
-    }
-    return claims
+    print(user)

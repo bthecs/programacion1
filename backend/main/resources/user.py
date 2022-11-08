@@ -13,17 +13,18 @@ from main.mail.functions import sendMail
 class User(Resource):
     
     #Obtener el recurso
-    @jwt_required()
+    #@jwt_required()
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
+        return user.to_json_complete()
         
         #Verifica el Usuario
-        identity = get_jwt_identity()
+        # identity = get_jwt_identity()
         
-        if identity:
-            return user.to_json_short()
-        else:
-            return user.to_json_pulic()
+        # if identity:
+        #     return user.to_json_short()
+        # else:
+        #     return user.to_json_pulic()
             
 
     @admin_required
@@ -49,7 +50,7 @@ class User(Resource):
 
 class Users(Resource):
     
-    @admin_required
+    #@admin_required
     def get(self):
         page = 1
         per_page = 10
@@ -59,10 +60,6 @@ class Users(Resource):
         if request.get_json():
             filters = request.get_json().items()
             for key, value in filters:
-                if key == 'page':
-                    page == int(value)
-                if key == 'per_page':
-                    per_page == int(value)
                 if key == "name":
                     name = name.filter(UserModel.name.like("%"+ value +"%"))
                 if key == "email":
@@ -87,7 +84,7 @@ class Users(Resource):
                     if value == "num_qualifications":
                         num_qualifications = num_qualifications.order_by(UserModel.num_qualifications)
         
-        users = users.paginate(page, per_page, True, 30)
+        users = users.paginate(page=page, per_page=per_page, error_out=False)
         return jsonify({
             "users" : [user.to_json_short() for user in users.items],
             "total" : users.total,
@@ -97,7 +94,7 @@ class Users(Resource):
             })
     
 
-    @admin_required
+    #@admin_required
     def post(self):
         
         user = UserModel.from_json(request.get_json())

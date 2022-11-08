@@ -1,3 +1,4 @@
+from cmath import pi
 from flask import request, jsonify, Blueprint
 from .. import db
 from main.models import UserModel
@@ -11,8 +12,12 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 #Método de logueo
 @auth.route('/login', methods=['POST'])
 def login():
+
     #Busca al usuario en la db por mail
-    user = db.session.query(UserModel).filter(UserModel.email == request.get_json().get("email")).first_or_404()
+    user = db.session.query(UserModel).filter(
+        UserModel.email == request.get_json().get("email")).first_or_404()
+    # print(user.password)
+    # print(user.validate_pass(request.get_json().get("password")))
     #Valida la contraseña
     if user.validate_pass(request.get_json().get("password")):
         #Genera un nuevo token
@@ -20,7 +25,7 @@ def login():
         access_token = create_access_token(identity=user)
         #Devolver valores y token
         data = {
-            'id': str(user.id),
+            'id': user.id,
             'email': user.email,
             'access_token': access_token
         }

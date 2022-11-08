@@ -62,6 +62,7 @@ class Poems(Resource):
         
         identity = get_jwt_identity()
         
+        
         poems.userId = identity
                 
         if request.get_json():
@@ -69,7 +70,7 @@ class Poems(Resource):
             
             if identity:
                 
-                poems = db.session.query(PoemModel).filter(PoemModel.user_id == identity).order_by(PoemModel.date.desc())
+                poems = db.session.query(PoemModel).filter(PoemModel.user_id != identity).order_by(PoemModel.date.desc())
             
             else:
                 for key, value in filters:
@@ -107,7 +108,7 @@ class Poems(Resource):
                             poems = poems.order_by(PoemModel.date.desc())
                     
                 
-        poems = poems.paginate(page, per_page, True, 30)
+        poems = poems.paginate(page=page, per_page=per_page, error_out=False)
         return jsonify({
             "poems" : [poem.to_json_poem_public() for poem in poems.items],
             "total" : poems.total,
@@ -132,4 +133,4 @@ class Poems(Resource):
 class PoemInfo(Resource):
     def get(self):
         poem = db.session.query(PoemModel)
-        return jsonify({"poem" : [poem.to_json() for poem in poem]})
+        return jsonify({"poem" : [poem.to_json_short() for poem in poem]})

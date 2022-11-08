@@ -14,16 +14,16 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
+    <form method="post" action="/login">
         <h3>Login Here</h3>
 
         <label for="username">Username</label>
-        <input type="text" placeholder="Email" id="username">
+        <input type="text" placeholder="email" type="email" name="email" id="username">
 
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="password" type="password" name="password" id="password">
 
-        <button>Log In</button>
+        <button type="submit">Log In</button>
     </form>
 </body>
 </html>
