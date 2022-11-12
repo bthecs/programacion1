@@ -10,89 +10,87 @@
 {% block content %}
 <section>
     <div id="poem">
-        <h1 class="poem_title">title</h1>
-        <h2>Lautaro Gimenez</h2>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
+        <h1 class="poem_title">{{poem.title}}</h1>
+        <h2>{{poem.user.name}}</h2>
+        <p class="poem_content">{{poem.body}}</p>
         <br>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
         <br>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
-        <br>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
-        <br>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
-        <br>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
-        <br>
-        <p class="poem_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsum officiis
-            reiciendis, nulla molestias neque minus dolores sit dicta qui praesentium at quas voluptates odio? Nam
-            quae tempora nobis atque.</p>
+        <p class="poem_content">{{poem.score}}</p>
+        <p class="poem_content">{{poem.date}}</p>
     </div>
 </section>
 <section>
     <div class="container">
         <div class="be-comment-block">
+            {% for comment in poem.qualifications %}
             <div class="be-comment">
+                <form method="post" action="/poem/delete_comment/{{comment.id}}">
                 <div class="be-comment-content">
+                    {% if request.cookies.get('access_token') %}
 
-                    <span class="be-comment-name">
-                        <a href="blog-detail-2.html">Matias</a>
-                    </span>
-
-                    <p class="be-comment-text">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat culpa qui blanditiis molestiae
-                        quas fuga explicabo tenetur minima? Odio vero rem quas perspiciatis minus ducimus fuga fugit
-                        incidunt sed eveniet.
-                    </p>
+                    <button type="submit">delete</button>
+                    <p>{{comment.id}}</p>
+                    <p class="be-comment-text">{{comment.comment}}</p>
+                    <p>{{comment.score}}</p>
+                    {% else %}
+                    <p class="be-comment-text">{{comment.comment}}</p>
+                    <p>{{comment.score}}</p>
+                    {% endif %}
                 </div>
+                </form> 
             </div>
-            <div class="be-comment">
-                <div class="be-comment-content">
-                    <span class="be-comment-name">
-                        <a href="blog-detail-2.html">Franco</a>
-                    </span>
-                    <p class="be-comment-text">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate quos sint incidunt dolores!
-                        Voluptates ipsam facilis impedit vitae sapiente aperiam eius inventore nesciunt ipsa earum.
-                        Soluta saepe odio ipsa amet.
-                    </p>
-                </div>
-            </div>
-            <div class="be-comment">
-                <div class="be-comment-content">
-                    <span class="be-comment-name">
-                        <a href="blog-detail-2.html">Lautaro</a>
-                    </span>
-                    <p class="be-comment-text">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero distinctio ab aliquam hic!
-                        Consectetur rerum quasi vel quis perferendis unde molestias quibusdam reiciendis laborum
-                        reprehenderit asperiores quisquam explicabo, velit dignissimos!
-                    </p>
-                </div>
-            </div>
-            <form class="form-block">
+            {% endfor %}
+            <form method="post" action="/poem/comment/{{poem.id}}">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
-                            <textarea class="form-input" required="" placeholder="Your text"></textarea>
+                            <textarea class="form-input" name="comment" placeholder="Your text"></textarea>
                         </div>
                     </div>
-                    <a class="btn btn-primary pull-right">submit</a>
+                    <button type="submit"><a>submit</a></button>
+                </div>
+                <div class="container d-flex justify-content-center mt-200">
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="stars">
+
+                                <form>
+
+                                    <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+
+                                    <label class="star star-5" for="star-5"></label>
+
+                                    <input class="star star-4" id="star-4" type="radio" name="star" value="4" />
+
+                                    <label class="star star-4" for="star-4"></label>
+
+                                    <input class="star star-3" id="star-3" type="radio" name="star" value="3" />
+
+                                    <label class="star star-3" for="star-3"></label>
+
+                                    <input class="star star-2" id="star-2" type="radio" name="star" value="2" />
+
+                                    <label class="star star-2" for="star-2"></label>
+
+                                    <input class="star star-1" id="star-1" type="radio" name="star" value="1" />
+
+                                    <label class="star star-1" for="star-1"></label>
+
+                                </form>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
                 </div>
             </form>
         </div>

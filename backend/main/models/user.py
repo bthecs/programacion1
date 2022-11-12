@@ -51,7 +51,7 @@ class User(db.Model):
     
     def to_json_complete(self):
         poems = [poem.to_json() for poem in self.poems]
-        qualifications = [qualify.to_json() for qualify in self.qualifications]
+        #qualifications = [qualify.to_json() for qualify in self.qualifications]
         user_json = {
             'id': self.id,
             'name': str(self.name),
@@ -59,9 +59,7 @@ class User(db.Model):
             'rol': str(self.rol),
             'email': str(self.email),
             'poems':poems,
-            'qualifications':qualifications,
             'num_poems':len(poems),
-            'num_qualifications':len(qualifications)
         }
         return user_json
     def to_json_short(self):

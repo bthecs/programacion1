@@ -64,7 +64,7 @@
 
         <div class="product-details">
 
-            <a href="/"><h1>{{poem.title}}</h1></a>
+            <a href="{{url_for('poem.poem_view', id=poem.id)}}"><h1>{{poem.title}}</h1></a>
             <h3>{{poem.user.name}}</h3>
             <br>
             <span class="hint-star star">

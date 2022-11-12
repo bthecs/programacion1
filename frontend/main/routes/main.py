@@ -6,7 +6,7 @@ from flask import Blueprint, make_response, render_template, url_for, request, r
 import requests
 import json
 from main.routes import user, poem
-from . import functions as f
+
 
 
 # Create a Blueprint object

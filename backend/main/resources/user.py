@@ -39,7 +39,7 @@ class User(Resource):
         return user.to_json() , 201
 
 
-    @admin_required
+    
     @jwt_required()
     def delete(self, id):
         user = db.session.query(UserModel).get_or_404(id)

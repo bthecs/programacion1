@@ -9,17 +9,19 @@
 
 
 
-{% block content %}}    
+{% block content %}}
 <section>
-    <div class="container" method="get" action="/user">
+    <div class="container" method="get" action="/">
 
-        
+
         <div class="card social-prof">
             <div class="card-body">
                 <div class="wrapper">
                     <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-                    <h3>Author 1</h3>
-                    <p>Poet 1</p>
+                    <h3>{{user.name}}</h3>
+                    <form action="/user/delete_user" method="post">
+                        <button type="submit">Delete Acount</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -27,7 +29,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body info-card social-about">
-                        <h2 class="text-blue">Profile</h2>
+                        <h2 class="text-blue">{{user.name}}</h2>
                         <h4><strong>Information User</strong></h4>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. </p>
@@ -38,7 +40,7 @@
                             <div class="col-6">
                                 <div class="social-info">
                                     <i class="fas fa-briefcase mr-2"></i>
-                                    <span>Poet</span>
+                                    <span>{{user.rol}}</span>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +48,7 @@
                             <div class="col-6">
                                 <div class="social-info">
                                     <i class="fas fas fa-envelope mr-2"></i>
-                                    <span>email@example.com</span>
+                                    <span>{{user.email}}</span>
                                 </div>
                             </div>
                         </div>
@@ -57,24 +59,28 @@
         </div>
     </div>
 </section>
-{% for poem in poems %}
+{% for poem in user.poems %}
 <section>
     <div id="container">
 
         <div class="product-details">
+            <form method="post" action="/user/delete_poem/{{poem.id}}">
+                <a href="{{url_for('poem.poem_view', id=poem.id)}}">
+                    <h1>{{poem.title}}</h1>
+                </a>
+                <h3>{{poem.user.name}}</h3>
+                <br>
+                <span class="hint-star star">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </span>
 
-            <a href="/"><h1>{{poem.title}}</h1></a>
-            <h3>{{poem.user.name}}</h3>
-            <br>
-            <span class="hint-star star">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-            </span>
-
-            <p class="information">{{poem.body}}</p>
+                <p class="information">{{poem.body}}</p>
+                <button type="submit">delete</button>
+            </form>
         </div>
 
         <div class="product-image">

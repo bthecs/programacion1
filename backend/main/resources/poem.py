@@ -38,19 +38,10 @@ class Poem(Resource):
     @jwt_required()
     def delete(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
-        
-        identity = get_jwt_identity()
-        
-        poem.userId = identity
-        
-        jwt_data = get_jwt()
-        
-        if jwt_data['rol'] == 'admin' or poem.userId == identity:
-            db.session.delete(poem)
-            db.session.commit()
-            return 'Poem successfully deleted', 204
-        else:
-            return 'You cannot delete this poem. Permissions are missing'
+        db.session.delete(poem)
+        db.session.commit()
+        return 'Poem successfully deleted', 204
+
 
 
 class Poems(Resource):

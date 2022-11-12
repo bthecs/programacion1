@@ -25,7 +25,7 @@ class Qualify(Resource):
         return qualify.to_json() , 201
 
     
-    @admin_required
+
     @jwt_required()
     def delete(self, id):
         
