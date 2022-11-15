@@ -105,7 +105,11 @@ def register():
         user = request.form['user']
         password = request.form['password']
         email = request.form['email']
+<<<<<<< HEAD
         api_url = 'http://localhost:8500/users'
+=======
+        api_url = 'http://localhost:8500/auth/register'
+>>>>>>> ba62707 (crud update)
 
         data = {"name": user, "password": password,"rol": "user" ,"email": email}
 
@@ -113,7 +117,11 @@ def register():
 
         response = requests.post(api_url, json = data, headers = headers)
 
+<<<<<<< HEAD
         if response.status_code == 201:
+=======
+        if response.status_code == 200:
+>>>>>>> ba62707 (crud update)
             return redirect(url_for('main.login'))
         else:
             return render_template('register.html', error="Email already exists")
