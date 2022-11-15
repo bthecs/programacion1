@@ -27,7 +27,6 @@ class User(Resource):
         #     return user.to_json_pulic()
             
 
-    @admin_required
     @jwt_required()
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)

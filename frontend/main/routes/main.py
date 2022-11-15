@@ -85,3 +85,31 @@ def login():
             return render_template('login.html')
     else:
         return render_template('login.html', error="Invalid email or password")
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    resp = make_response(redirect(url_for('main.index')))
+    resp.delete_cookie('access_token')
+    resp.delete_cookie('id')
+    return resp
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        user = request.form['user']
+        password = request.form['password']
+        email = request.form['email']
+        api_url = 'http://localhost:8500/auth/register'
+
+        data = {"name": user, "password": password,"rol": "user" ,"email": email}
+
+        headers = {"Content-Type" : "application/json"}
+
+        response = requests.post(api_url, json = data, headers = headers)
+
+        if response.status_code == 200:
+            return redirect(url_for('main.login'))
+        else:
+            return render_template('register.html', error="Email already exists")
+    return render_template('register.html')

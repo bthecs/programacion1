@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super()}}
+<link rel="stylesheet" href="{{ url_for('static',filename='add_poem.css')}}" type="text/css">
+<title>New Poem</title>
+{% endblock %}
+
+{% block content %}
+<form class="form-style-9" method="post" action="/poem/edit_poem/{{poem.id}}">
+    <ul>
+        <li>
+            <p>Title</p>
+            <textarea name="title" class="field-style" placeholder="body">{{poem.title}}</textarea>
+        </li>
+        <li>
+            <p>Body</p>
+            <textarea name="body" class="field-style" placeholder="body">{{poem.body}}</textarea>
+        </li>
+        <li>
+            <button type="submit">upload poem</button>
+        </li>
+    </ul>
+</form>
+{% endblock %}

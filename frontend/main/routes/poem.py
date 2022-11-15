@@ -6,7 +6,6 @@ import json
 # Create a Blueprint object
 poem = Blueprint('poem', __name__, url_prefix='/poem')
 
-poems = [{"id":0 , 'title': 'Poem 1', 'body': 'This is the body of poem 1'}]
 
 @poem.route('/')
 def index():
@@ -31,6 +30,10 @@ def poem_view(id):
             print(poem)
 
             return render_template('poem_view.html', poem=poem)
+    else:
+        return redirect(url_for('main.index'))
+
+
 
 
 @poem.route('/comment/<int:id>', methods=['POST'])
@@ -74,10 +77,60 @@ def delete(id):
 
     return redirect(url_for('user.login'))
 
-# Create a route delete comment
-# @poem.route('/delete_comment/<int:id>', methods=['DELETE'])
-# def delete_comment(id):
-#     cookie = request.cookies.get('access_token')
-#     if cookie:
-#         if request.method == 'DELETE':
-#             url = 'http://
+
+@poem.route('/edit_comment/<int:id>', methods=['POST'])
+def edit(id):
+    cookie = request.cookies.get('access_token')
+    if cookie:
+        if request.method == 'POST':
+            url = 'http://127.0.0.1:8500/qualify/' + str(id)
+
+            data = {"score": int(request.form['star'])}
+
+            headers = {'Content-type': 'application/json', 'Authorization' : f"Bearer {cookie}"}
+
+            response = requests.put(url, json=data, headers=headers)
+
+            print(response.text)
+
+            return redirect(url_for('main.index'))
+
+    return redirect(url_for('user.login'))
+
+
+@poem.route('/edit_poem/<int:id>', methods=['GET', 'POST'])
+def edit_poem(id):
+    cookie = request.cookies.get('access_token')
+    if cookie:
+        if request.method == 'GET':
+
+            url = 'http://127.0.0.1:8500/poem/' + str(id)
+
+            headers = {'Content-type': 'application/json', 'Authorization': f"Bearer {cookie}"}
+
+            response = requests.get(url, headers=headers)
+
+            poem = json.loads(response.text)
+
+            print(poem)
+
+            return render_template('update_poem.html', poem=poem)
+
+        if request.method == 'POST':
+            url = 'http://127.0.0.1:8500/poem/' + str(id)
+
+            data = {"title": request.form['title'], "body": request.form['body']}
+
+            headers = {'Content-type': 'application/json', 'Authorization' : f"Bearer {cookie}"}
+
+            response = requests.put(url, json=data, headers=headers)
+
+            print(response.text)
+
+            return redirect(url_for('main.index'))
+
+    return redirect(url_for('user.login'))
+
+
+
+            

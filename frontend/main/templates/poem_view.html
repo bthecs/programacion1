@@ -9,15 +9,18 @@
 
 {% block content %}
 <section>
-    <div id="poem">
-        <h1 class="poem_title">{{poem.title}}</h1>
-        <h2>{{poem.user.name}}</h2>
-        <p class="poem_content">{{poem.body}}</p>
-        <br>
-        <br>
-        <p class="poem_content">{{poem.score}}</p>
-        <p class="poem_content">{{poem.date}}</p>
-    </div>
+    <form method="get" action="/poem/edit_poem/{{poem.id}}">
+        <div id="poem">
+            <h1 class="poem_title">{{poem.title}}</h1>
+            <h2>{{poem.user.name}}</h2>
+            <p class="poem_content">{{poem.body}}</p>
+            <br>
+            <br>
+            <p class="poem_content">{{poem.score}}</p>
+            <p class="poem_content">{{poem.date}}</p>
+        </div>
+        <button type="submit"><a>Edit</a></button>
+    </form>
 </section>
 <section>
     <div class="container">
@@ -25,19 +28,19 @@
             {% for comment in poem.qualifications %}
             <div class="be-comment">
                 <form method="post" action="/poem/delete_comment/{{comment.id}}">
-                <div class="be-comment-content">
-                    {% if request.cookies.get('access_token') %}
+                    <div class="be-comment-content">
+                        {% if request.cookies.get('access_token') %}
 
-                    <button type="submit">delete</button>
-                    <p>{{comment.id}}</p>
-                    <p class="be-comment-text">{{comment.comment}}</p>
-                    <p>{{comment.score}}</p>
-                    {% else %}
-                    <p class="be-comment-text">{{comment.comment}}</p>
-                    <p>{{comment.score}}</p>
-                    {% endif %}
-                </div>
-                </form> 
+                        <button type="submit">delete</button>
+                        <p>{{comment.id}}</p>
+                        <p class="be-comment-text">{{comment.comment}}</p>
+                        <p>{{comment.score}}</p>
+                        {% else %}
+                        <p class="be-comment-text">{{comment.comment}}</p>
+                        <p>{{comment.score}}</p>
+                        {% endif %}
+                    </div>
+                </form>
             </div>
             {% endfor %}
             <form method="post" action="/poem/comment/{{poem.id}}">
@@ -80,7 +83,9 @@
 
                                     <label class="star star-1" for="star-1"></label>
 
+
                                 </form>
+
 
                             </div>
 
