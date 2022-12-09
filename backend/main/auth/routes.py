@@ -35,35 +35,3 @@ def login():
         return 'Incorrect password', 401
 
 
-#Método de registro
-@auth.route('/register', methods=['POST'])
-def register():
-    #Recibe los datos del usuario
-    data = request.get_json()
-    #Valida si el usuario ya existe
-    if db.session.query(UserModel).filter(UserModel.email == data.get('email')).count() > 0:
-    
-        return 'User already exists', 400
-    else:
-        #Crea el usuario
-        new_user = UserModel(
-            name=data.get('name'),
-            email=data.get('email'),
-            rol=data.get('rol'),
-            password=data.get('password')
-
-        )
-        #Guarda el usuario en la db
-        db.session.add(new_user)
-        db.session.commit()
-        #Genera un nuevo token
-        access_token = create_access_token(identity=new_user)
-        #Devuelve los datos del usuario y el token
-        data = {
-            'id': new_user.id,
-            'email': new_user.email,
-            'access_token': access_token
-
-        }
-
-        return data, 200

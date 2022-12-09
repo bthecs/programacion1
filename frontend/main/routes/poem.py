@@ -27,7 +27,11 @@ def poem_view(id):
 
             poem = json.loads(response.text)
 
-            print(poem)
+            for i in poem['qualifications']:
+                i['user_id'] = str(i['user_id'])
+
+            poem['user']['id'] = str(poem['user']['id'])         
+
 
             return render_template('poem_view.html', poem=poem)
     else:

@@ -49,9 +49,11 @@
                         <button id="searchBtn" type="button" class="btn btn-secondary btn-search"><span
                                 class="glyphicon glyphicon-search">&nbsp;</span> <span
                                 class="label-icon">Search</span></button>
+                        {% if request.cookies.get('access_token') %}
                         <button id="searchBtn" type="button" class="btn btn-secondary btn-search"><a href="/add_poem"><span
                                 class="glyphicon glyphicon-search">&nbsp;</span> <span class="label-icon">Add
                                 Poem</span></a></button>
+                        {% endif %}
                     </div>
                 </div>
             </div>

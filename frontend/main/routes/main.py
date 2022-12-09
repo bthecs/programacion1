@@ -37,16 +37,21 @@ def add_poem():
         if request.method == 'POST':
             url = 'http://127.0.0.1:8500/poems'
 
-            data = {"title": request.form['title'], "body": request.form['body'], "user_id": 18}
+            data = {"title": request.form['title'], "body": request.form['body'], "user_id": request.cookies.get('id')}
 
             headers = {'Content-type': 'application/json', 'Authorization': f'Bearer {cookie}'}
 
             response = requests.post(url, json=data, headers=headers)
 
             print(response.text)
-            return redirect(url_for('main.index'))
 
-        
+    
+            # redirigir al poema creado
+            return redirect(url_for('main.index'))
+        else:
+            return render_template('create_poem.html')
+    else:
+        return redirect(url_for('main.index'))       
             # response = requests.post(url, json=data, headers=headers)
             # print(response.text)
 
@@ -100,7 +105,7 @@ def register():
         user = request.form['user']
         password = request.form['password']
         email = request.form['email']
-        api_url = 'http://localhost:8500/auth/register'
+        api_url = 'http://localhost:8500/users'
 
         data = {"name": user, "password": password,"rol": "user" ,"email": email}
 
@@ -108,7 +113,7 @@ def register():
 
         response = requests.post(api_url, json = data, headers = headers)
 
-        if response.status_code == 200:
+        if response.status_code == 201:
             return redirect(url_for('main.login'))
         else:
             return render_template('register.html', error="Email already exists")

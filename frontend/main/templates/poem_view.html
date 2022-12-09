@@ -19,7 +19,10 @@
             <p class="poem_content">{{poem.score}}</p>
             <p class="poem_content">{{poem.date}}</p>
         </div>
+        {% if poem.user.id == request.cookies.get('id') %}
         <button type="submit"><a>Edit</a></button>
+        {% endif %}
+        
     </form>
 </section>
 <section>
@@ -29,15 +32,18 @@
             <div class="be-comment">
                 <form method="post" action="/poem/delete_comment/{{comment.id}}">
                     <div class="be-comment-content">
+                        
                         {% if request.cookies.get('access_token') %}
-
+                        
+                        {% if comment.user_id == request.cookies.get('id') %}
                         <button type="submit">delete</button>
-                        <p>{{comment.id}}</p>
+                        {% endif %}
                         <p class="be-comment-text">{{comment.comment}}</p>
                         <p>{{comment.score}}</p>
                         {% else %}
                         <p class="be-comment-text">{{comment.comment}}</p>
                         <p>{{comment.score}}</p>
+                        
                         {% endif %}
                     </div>
                 </form>
