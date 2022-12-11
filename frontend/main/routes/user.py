@@ -8,7 +8,7 @@ import json
 # Create a Blueprint object
 author = Blueprint('user', __name__, url_prefix='/user')
 
-
+# VISTA DEL PERFIL DEL USUARIO
 @author.route('/')
 def index():
     cookie = request.cookies.get('access_token')
@@ -26,9 +26,10 @@ def index():
         print(user)
 
         return render_template('profile.html', user=user)
-    return render_template('profile.html')
+    return redirect(url_for('main.index'))
 
 
+# VISTA DE UN USUARIO
 @author.route('/<int:id>', methods=['GET'])
 def user_view(id):
     cookie = request.cookies.get('access_token')
@@ -48,28 +49,9 @@ def user_view(id):
             return render_template('profile.html', user=user)
     else:
         return redirect(url_for('main.index'))
-# # Create a route for the home page
-# @author.route('/user/<int:id>', methods=['GET', 'POST'])
-# def profile():
-#     cookie = request.cookies.get('access_token')
-#     if cookie:
-#         if request.method == 'GET':
-#             user_id = request.args.get('id')
-#             url = 'http://127.0.0.1:8500/user/' + user_id
 
-#             headers = {'Content-type': 'application/json', 'Authorization': f'Bearer {cookie}'}
 
-#             response = requests.get(url, headers=headers)
-
-#             user = json.loads(response.text)
-
-#             print(user)
-
-#             return render_template('profile.html', user=user)
-#     return render_template('profile.html')
-
-#delete poem user
-
+# ELIMINAR POEMA EN VISTA DE USUARIO
 @author.route('/delete_poem/<int:id>', methods=['POST'])
 def delete(id):
     cookie = request.cookies.get('access_token')
@@ -83,6 +65,7 @@ def delete(id):
 
 #delete user
 
+# ELIMINAR USUARIO
 @author.route('/delete_user', methods=['POST'])
 def delete_user():
     cookie = request.cookies.get('access_token')
@@ -96,7 +79,7 @@ def delete_user():
     return redirect(url_for('main.index'))
 
 
-#update user
+# ACTUALIZAR USUARIO
 @author.route('/edit_user/<int:id>', methods=['GET', 'POST'])
 def edit_poem(id):
     cookie = request.cookies.get('access_token')
