@@ -12,7 +12,7 @@ from main.routes import user, poem
 # Create a Blueprint object
 app = Blueprint('main', __name__, url_prefix='/')
 
-# HOME
+# Create a route for the home page
 @app.route('/')
 def index():
     url = 'http://127.0.0.1:8500/poeminfo'
@@ -29,7 +29,7 @@ def index():
     return render_template('home.html', poems=poems["poem"])
 
     
-# AGREGAR POEMA
+
 @app.route('/add_poem', methods=['GET', 'POST'])
 def add_poem():
     cookie = request.cookies.get('access_token')
@@ -56,6 +56,9 @@ def add_poem():
             # print(response.text)
 
 
+        
+
+    return render_template('create_poem.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

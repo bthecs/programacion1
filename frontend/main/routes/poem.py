@@ -6,13 +6,13 @@ import json
 # Create a Blueprint object
 poem = Blueprint('poem', __name__, url_prefix='/poem')
 
-# VISTA DE TODOS LOS POEMAS
+
 @poem.route('/')
 def index():
     return render_template('poem_view.html')
 
 
-# VISTA DE UN POEMA
+# Create a route for the home page
 @poem.route('/<int:id>', methods=['GET'])
 def poem_view(id):
     cookie = request.cookies.get('access_token')
@@ -29,7 +29,6 @@ def poem_view(id):
 
             for i in poem['qualifications']:
                 i['user_id'] = str(i['user_id'])
-                
 
             poem['user']['id'] = str(poem['user']['id'])         
 
@@ -40,38 +39,30 @@ def poem_view(id):
 
 
 
-# VISTA DE CREAR COMENTARIO Y CALIFICACION
+
 @poem.route('/comment/<int:id>', methods=['POST'])
 def comment(id):
     cookie = request.cookies.get('access_token')
     if cookie:
         if request.method == 'POST':
-            user_id = request.cookies.get('id')
-           
-           
-            if request.form['comment'] != '' or  request.form['star'] != '':
+            user_id = request.cookies.get('id')            
 
-                data = {"user_id": int(user_id), "poem_id": int(id), "score": int(request.form['star']), "comment": request.form['comment']}
+            data = {"user_id": int(user_id), "poem_id": int(id), "score": int(request.form['star']), "comment": request.form['comment']}
 
-                url = 'http://127.0.0.1:8500/qualifications'
+            url = 'http://127.0.0.1:8500/qualifications'
 
-                headers = {'Content-type': 'application/json', 'Authorization': f"Bearer {cookie}"}
+            headers = {'Content-type': 'application/json', 'Authorization': f"Bearer {cookie}"}
 
-                response = requests.post(url, json=data, headers=headers)
-                print(response.text)
-                return redirect(url_for('poem.poem_view', id=id))
+            print(data)
 
-            else:
-                return redirect(url_for('poem.poem_view', id=id))       
+            response = requests.post(url, json=data, headers=headers)
 
-        else:
+
             return redirect(url_for('poem.poem_view', id=id))
-    else:
-        return redirect(url_for('user.login'))
+        
+    return redirect(url_for('user.login'))
 
 
-
-# ELIMINAR COMENTARIO
 @poem.route('/delete_comment/<int:id>', methods=['POST'])
 def delete(id):
     print("hola")
@@ -86,16 +77,11 @@ def delete(id):
 
             print(response.text)
 
-            return redirect(url_for('peom.poem_view', id=id))
+            return redirect(url_for('main.index'))
 
-        else:
-            return redirect(url_for('poem.poem_view', id=id))
-    else:
-        return redirect(url_for('user.login'))
+    return redirect(url_for('user.login'))
 
 
-
-# EDITAR COMENTARIO
 @poem.route('/edit_comment/<int:id>', methods=['POST'])
 def edit(id):
     cookie = request.cookies.get('access_token')
@@ -116,7 +102,6 @@ def edit(id):
     return redirect(url_for('user.login'))
 
 
-# VISTA DE EDITAR POEMA
 @poem.route('/edit_poem/<int:id>', methods=['GET', 'POST'])
 def edit_poem(id):
     cookie = request.cookies.get('access_token')
